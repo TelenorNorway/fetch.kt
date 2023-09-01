@@ -22,7 +22,6 @@ kotlin.jvmToolchain(17)
 
 publishing {
 	repositories {
-		mavenLocal()
 		github.actions()
 	}
 	publications.register<MavenPublication>("gpr") {
