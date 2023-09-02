@@ -23,7 +23,9 @@ repositories {
 }
 
 dependencies {
-	implementation("no.telenor.fetch:fetch:<version>")
+	val fetchVersion = "<version>"
+	implementation("no.telenor.fetch:fetch:$fetchVersion")
+	testImplementation("no.telenor.fetch:test-fetch:$fetchVersion")
 }
 ```
 
@@ -51,5 +53,42 @@ fun MyApiClient.myRequest(name: String) = fetch<HelloWorld>(
 ) {
 	get
 	Accept header Json
+}
+```
+
+## Usage in Tests
+
+```kotlin
+// MySpringApp.kt
+data class Foo(val bar: String = "baz")
+
+@SpringBootApplication
+@RestController
+class Demo123123123123Application {
+	@GetMapping("/")
+	fun hello() = Foo()
+}
+
+fun main(args: Array<String>) {
+	runApplication<Demo123123123123Application>(*args)
+}
+```
+
+```kotlin
+// MySpringAppTest.kt
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class MySpringAppTest : TestFetch {
+	@Autowired
+	override lateinit var testRestTemplate: LocalTestRestTemplate
+}
+```
+
+```kotlin
+@DisplayName("GET /foo")
+class FooControllerTest : MySpringAppTest() {
+	@Test
+	fun `foo bar baz test`() {
+		assert(fetch<Foo>("/foo").body!!.bar == "baz")
+	}
 }
 ```
