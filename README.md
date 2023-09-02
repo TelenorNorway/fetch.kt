@@ -65,8 +65,8 @@ data class Foo(val bar: String = "baz")
 @SpringBootApplication
 @RestController
 class MySpringApp {
-	@GetMapping("/")
-	fun hello() = Foo()
+	@GetMapping("/foo")
+	fun foo() = Foo()
 }
 
 fun main(args: Array<String>) {
