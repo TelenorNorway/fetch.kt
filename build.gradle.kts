@@ -5,26 +5,32 @@ plugins {
 	id("no.ghpkg") version "0.1.6"
 }
 
-group = "no.telenor.fetch"
-version = System.getenv("VERSION") ?: "UNVERSIONED"
-
 repositories {
 	mavenCentral()
 }
 
-dependencies {
-	// note: Snakeyaml is used for project configurations.
-	@Suppress("VulnerableLibrariesLocal", "RedundantSuppression")
-	implementation("org.springframework.boot:spring-boot-starter-web:3.1.3")
-}
+allprojects {
+	apply(plugin = "org.jetbrains.kotlin.jvm")
+	apply(plugin = "io.spring.dependency-management")
+	apply(plugin = "maven-publish")
+	apply(plugin = "no.ghpkg")
 
-kotlin.jvmToolchain(17)
+	group = "no.telenor.fetch"
+	version = System.getenv("VERSION") ?: "UNVERSIONED"
 
-publishing {
 	repositories {
-		github.actions()
+		mavenCentral()
 	}
-	publications.register<MavenPublication>("gpr") {
-		from(components["kotlin"])
+
+	kotlin.jvmToolchain(17)
+
+	publishing {
+		repositories {
+			mavenLocal()
+			github.actions()
+		}
+		publications.register<MavenPublication>("gpr") {
+			from(components["kotlin"])
+		}
 	}
 }

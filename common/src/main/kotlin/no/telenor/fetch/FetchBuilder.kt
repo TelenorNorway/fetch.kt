@@ -12,7 +12,7 @@ import kotlin.reflect.KFunction
 
 private val mapper = ObjectMapper()
 
-class FetchBuilder<Self : Fetch>(val self: Self) {
+class FetchBuilder<Self : WithExchange>(val self: Self) {
 
 	// region QueryBuilder
 	internal val queryParamMap = mutableMapOf<String, String>()
@@ -104,7 +104,7 @@ class FetchBuilder<Self : Fetch>(val self: Self) {
 
 }
 
-fun <This : Fetch, R> FetchBuilder<*>.thisAs(
+fun <This : WithExchange, R> FetchBuilder<*>.thisAs(
 	@Suppress("UNUSED_PARAMETER") klass: KFunction<This>,
 	block: (@Scoped FetchBuilder<This>).() -> R
 ): R {
@@ -112,14 +112,14 @@ fun <This : Fetch, R> FetchBuilder<*>.thisAs(
 	return (this as FetchBuilder<This>).let(block)
 }
 
-fun <This : Fetch> FetchBuilder<*>.thisAs(
+fun <This : WithExchange> FetchBuilder<*>.thisAs(
 	@Suppress("UNUSED_PARAMETER") klass: KFunction<This>,
 ): FetchBuilder<This> {
 	@Suppress("UNCHECKED_CAST")
 	return (this as FetchBuilder<This>)
 }
 
-fun <This : Fetch, R> FetchBuilder<*>.selfAs(
+fun <This : WithExchange, R> FetchBuilder<*>.selfAs(
 	@Suppress("UNUSED_PARAMETER") klass: KFunction<This>,
 	block: (@Scoped This).() -> R
 ): R {
@@ -127,7 +127,7 @@ fun <This : Fetch, R> FetchBuilder<*>.selfAs(
 	return (this as FetchBuilder<This>).self.let(block)
 }
 
-fun <This : Fetch, R> FetchBuilder<*>.selfAs(
+fun <This : WithExchange, R> FetchBuilder<*>.selfAs(
 	@Suppress("UNUSED_PARAMETER") klass: KFunction<This>,
 ): This {
 	@Suppress("UNCHECKED_CAST")

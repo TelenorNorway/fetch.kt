@@ -1,11 +1,11 @@
 package no.telenor.fetch.util
 
-import no.telenor.fetch.Fetch
+import no.telenor.fetch.WithExchange
 import no.telenor.fetch.WithLogger
 import org.slf4j.MDC
 import org.springframework.http.HttpMethod
 
-internal fun Fetch.logRequest(
+internal fun WithExchange.logRequest(
 	method: HttpMethod,
 	url: String,
 	parameters: Map<String, String?>
