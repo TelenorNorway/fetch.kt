@@ -64,13 +64,13 @@ data class Foo(val bar: String = "baz")
 
 @SpringBootApplication
 @RestController
-class Demo123123123123Application {
+class MySpringApp {
 	@GetMapping("/")
 	fun hello() = Foo()
 }
 
 fun main(args: Array<String>) {
-	runApplication<Demo123123123123Application>(*args)
+	runApplication<MySpringApp>(*args)
 }
 ```
 
