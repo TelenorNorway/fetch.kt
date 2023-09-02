@@ -4,9 +4,8 @@ A higher-level `fetch` function for Spring Boot 3's `RestTemplate`.
 
 > **Warning**
 >
-> This module might work for Java, but there is no guarantee and this
-> module is not built to run on Java. No support will be provided for
-> Java consumers.
+> This package is built for Kotlin! You probably can use it in Java,
+> however.. No support will be provided for Java consumers.
 
 ## Dependency
 
