@@ -10,7 +10,7 @@ repositories {
 	mavenCentral()
 }
 
-allprojects {
+subprojects {
 	apply(plugin = "org.jetbrains.kotlin.jvm")
 	apply(plugin = "org.springframework.boot")
 	apply(plugin = "io.spring.dependency-management")
