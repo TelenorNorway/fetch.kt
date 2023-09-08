@@ -20,7 +20,7 @@ class FetchBuilder<Self : WithExchange>(val self: Self) {
 
 	infix fun String.queryTo(to: Any?) {
 		if (to == null) return
-		val key = "q${this.substring(0, 1).uppercase()}${this.substring(1)}"
+		val key = "query${this.substring(0, 1).uppercase()}${this.substring(1)}"
 		queryParamMap[this] = key
 		urlParametersAppend[key] = to.toString()
 	}
